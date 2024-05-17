@@ -9,3 +9,15 @@ sign_up_btn.addEventListener("click", () => {
 sign_in_btn.addEventListener("click", () => {
   container.classList.remove("sign-up-mode");
 });
+document.addEventListener('DOMContentLoaded', function () {
+  const togglePasswordIcons = document.querySelectorAll('.toggle-password');
+  
+  togglePasswordIcons.forEach(icon => {
+      icon.addEventListener('click', function () {
+          const passwordField = this.previousElementSibling;
+          const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+          passwordField.setAttribute('type', type);
+          this.classList.toggle('fa-eye-slash');
+      });
+  });
+});
