@@ -19,15 +19,15 @@ class CreateUsuariosTable extends Migration
             $table->string('apellido')->nullable();
             $table->string('email')->unique();
             $table->string('username')->unique();
-            $table->string('password');
+            $table->string('pass');
             $table->date('fecha_nacimiento')->nullable();
             $table->timestamp('fecha_registro')->nullable();
             $table->string('sexo')->nullable();
-            $table->boolean('status');
-            $table->boolean('privado');
-            $table->boolean('admin');
+            $table->boolean('status')->default(0); // Modificado para permitir valores nulos
+            $table->boolean('privado')->default(0);;
+            $table->boolean('admin')->default(0);;
             $table->string('avatar')->nullable();
-            $table->unsignedBigInteger('carrera_id'); // Nombre de la columna de la clave foránea
+            $table->unsignedBigInteger('carrera_id')->nullable(); // Nombre de la columna de la clave foránea
             $table->text('biografia')->nullable();
             $table->timestamps();
 
