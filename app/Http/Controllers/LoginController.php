@@ -3,17 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    //
     public function index()
     {
-        if(Auth::check()){
-            return redirect()->route('home');
-        }
         return view('login');
     }
 
@@ -21,20 +17,20 @@ class LoginController extends Controller
     {
         $credentials = $request->getCredentials();
         
-        if(!Auth::validate($credentials)):
-            dd('error');
-           return redirect('/')->withErrors(trans('auth.failed'));
-        endif;
-        $user = Auth::getProvider()->retrieveByCredentials($credentials);
-        
+        if (!Auth::attempt($credentials)) {
+            $hola = !Auth::attempt($credentials);
+            dd($hola);
+            return redirect('/');
+        }
 
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
         Auth::login($user);
 
         return $this->authenticated($request, $user);
     }
 
-    protected function authenticated(Request $request, $user) 
+    public function authenticated(Request $request, $user)
     {
-        return redirect()->route('home');
+        return redirect('/home');
     }
 }
