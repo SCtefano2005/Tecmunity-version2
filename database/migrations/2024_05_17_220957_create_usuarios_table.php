@@ -19,7 +19,7 @@ class CreateUsuariosTable extends Migration
             $table->string('apellido')->nullable();
             $table->string('email')->unique();
             $table->string('username')->unique();
-            $table->string('pass');
+            $table->string('password');
             $table->date('fecha_nacimiento')->nullable();
             $table->timestamp('fecha_registro')->nullable();
             $table->string('sexo')->nullable();

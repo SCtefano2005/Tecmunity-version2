@@ -53,7 +53,11 @@
                             </nav>
                         @endif
                     </header>
-
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button style="color: #FF2D20" type="submit">Logout</button>
+                    </form>
+                    
                     <main class="mt-6">
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
                             <a

@@ -11,8 +11,8 @@
                 @csrf
                 <div class="input-field">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Usuario" name="Username" required />
-                    @error('Username')
+                    <input type="text" placeholder="Usuario" name="username" required />
+                    @error('username')
                         <br>
                         <small style="color: red">{{ $message }}</small>
                         <br>
@@ -20,7 +20,7 @@
                 </div>
                 <div class="input-field password-field">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Contraseña" name="Pass" required />
+                    <input type="password" placeholder="Contraseña" name="password" required />
                     @error('Pass')
                         <br>
                         <small style="color: red">{{ $message }}</small>
@@ -53,8 +53,8 @@
                 </div>
                 <div class="input-field password-field">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Contraseña" name="pass" required />
-                    @error('pass')
+                    <input type="password" placeholder="Contraseña" name="password" required />
+                    @error('password')
                         <br>
                         <small style="color: red">{{ $message }}</small>
                         <br>
@@ -63,8 +63,8 @@
                 </div>
                 <div class="input-field password-field">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Confirmar Contraseña" name="pass_confirmation" required />
-                    @error('pass_confirmation')
+                    <input type="password" placeholder="Confirmar Contraseña" name="password_confirmation" required />
+                    @error('password_confirmation')
                         <br>
                         <small style="color: red">{{ $message }}</small>
                         <br>

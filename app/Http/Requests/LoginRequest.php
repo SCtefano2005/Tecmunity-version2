@@ -24,22 +24,22 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'Username' => 'required',
-            'Pass' => 'required|min:8'
+            'username' => 'required',
+            'password' => 'required|min:8'
         ];
     }
 
     public function getCredentials(){
-        $username = $this->get('Username');
+        $username = $this->get('username');
         
         if($this->isEmail($username)){
             return [
                 'email' => $username,
-                'pass' => hash::make($this->get('Pass'))
+                'password' => hash::make($this->get('password'))
             ];
         }
         
-        return $this->only('Username', 'Pass');
+        return $this->only('username', 'password');
     }
 
     public function isEmail($value){
