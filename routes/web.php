@@ -12,3 +12,4 @@ route::post('/login', [LoginController::class, 'login']);
 route::get('/home', function(){
     return view('welcome');
 });
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
