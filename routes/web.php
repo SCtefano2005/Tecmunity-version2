@@ -11,8 +11,4 @@ route::post('/register', [RegisterController::class, 'Register']);
 route::post('/login', [LoginController::class, 'login']);
 route::get('/home', function(){
     return view('welcome');
-route::get('/hola', function(){
-    return 'jodsaj';
-});
-Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
