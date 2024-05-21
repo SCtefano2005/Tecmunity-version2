@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\TecsupEmailRule; 
 
 class RegisterRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|unique:usuarios,email',
+            'email' => ['required', 'email', new TecsupEmailRule, 'unique:usuarios,email'],
             'username' => 'required|max:10|unique:usuarios,username',
             'password' => 'required|string|min:8',
             'password_confirmation' => 'required|string|same:password',
