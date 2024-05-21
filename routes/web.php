@@ -4,16 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\HomeController;
 
 Route::get('/', [RegisterController::class, 'index']);
-Route::post('/register', [RegisterController::class, 'register']);
-
-Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [LoginController::class, 'login']);
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index']);
-    
+route::get('/', [LoginController::class, 'index']);
+route::post('/register', [RegisterController::class, 'Register']);
+route::post('/login', [LoginController::class, 'login']);
+route::get('/home', function(){
+    return view('welcome');
 });
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
