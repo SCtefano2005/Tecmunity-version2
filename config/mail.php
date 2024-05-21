@@ -12,7 +12,8 @@ return [
     | the message. All additional mailers can be configured within the
     | "mailers" array. Examples of each type of mailer are provided.
     |
-    */
+    */'default' => env('MAIL_MAILER', 'sendgrid'),
+
 
     'default' => env('MAIL_MAILER', 'log'),
 
@@ -47,6 +48,11 @@ return [
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
+
+            'sendgrid' => [
+                'transport' => 'sendgrid',
+            ],
+            
         ],
 
         'ses' => [
