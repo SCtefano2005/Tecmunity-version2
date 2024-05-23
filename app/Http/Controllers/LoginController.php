@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
     public function index()
     {
-        if (Auth::check()) {
+        if(auth::check()){
             return redirect('/home');
         }
         return view('login');
@@ -19,28 +18,18 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $credentials = $request->only('username', 'password');
-        $usernameOrEmail = $credentials['username'];
+        $credentials = $request->getCredentials();
 
-        // Si el input es un correo electrónico de Tecsup
-        if (filter_var($usernameOrEmail, FILTER_VALIDATE_EMAIL)) {
-            if (preg_match('/@tecsup\.edu\.pe$/', $usernameOrEmail)) {
-                $credentials = [
-                    'email' => $usernameOrEmail,
-                    'password' => $credentials['password']
-                ];
-            } else {
-                return redirect('/')
-                    ->withErrors(['username' => 'Por favor, ingresa un correo electrónico válido de @tecsup.edu.pe']);
-            }
-        }
-
-        // Intentar autenticación con las credenciales ajustadas
         if (!Auth::attempt($credentials)) {
+
             return redirect('/')->withErrors(['error' => 'Credenciales incorrectas.']);
+
+            return redirect('/');
+
         }
 
-        $user = Auth::user();
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+        Auth::login($user);
 
         // Verificar si el correo electrónico del usuario está verificado
         if (!$user->email_verified_at) {
@@ -51,7 +40,7 @@ class LoginController extends Controller
         return $this->authenticated($request, $user);
     }
 
-    protected function authenticated(Request $request, $user)
+    public function authenticated(Request $request, $user)
     {
         return redirect('/home');
     }

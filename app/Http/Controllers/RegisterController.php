@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Usuario;
+
 use Illuminate\Support\Facades\Validator;
 use App\Mail\TestEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+
+use Illuminate\Support\Facades\Session;
+
+
 
 class RegisterController extends Controller
 {
@@ -21,6 +26,7 @@ class RegisterController extends Controller
     {
         // Crea el usuario con los datos validados del formulario
         $user = Usuario::create($request->validated());
+
         
         // Genera un token de verificación único
         $verificationToken = Str::random(60);
@@ -87,3 +93,8 @@ class RegisterController extends Controller
 }
 
 ?>
+
+        return redirect('/')->with('success', 'ok');
+    }
+}
+
