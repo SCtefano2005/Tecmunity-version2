@@ -7,13 +7,19 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [RegisterController::class, 'index']);
-Route::post('/register', [RegisterController::class, 'register']);
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index']);
-    
-});
+Route::middleware(['auth', 'verified'])->get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+Route::get('/espera', function () {
+    return view('esperaverificacion');
+})->name('espera');
+
+Route::get('/verify-email/{token}', [RegisterController::class, 'verifyEmail'])->name('verify.email');
+
+?>

@@ -37,11 +37,16 @@ class LoginController extends Controller
 
         // Intentar autenticación con las credenciales ajustadas
         if (!Auth::attempt($credentials)) {
-            return redirect('/');
-                
+            return redirect('/')->withErrors(['error' => 'Credenciales incorrectas.']);
         }
 
         $user = Auth::user();
+
+        // Verificar si el correo electrónico del usuario está verificado
+        if (!$user->email_verified_at) {
+            Auth::logout();
+            return redirect('/')->with('login_error', 'Debes verificar tu correo electrónico antes de iniciar sesión.');
+}
 
         return $this->authenticated($request, $user);
     }
@@ -51,4 +56,3 @@ class LoginController extends Controller
         return redirect('/home');
     }
 }
-

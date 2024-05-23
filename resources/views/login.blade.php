@@ -114,6 +114,16 @@
         Swal.fire("Registro con exito!");
     </script>
 @endif
+@if(session('login_error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de inicio de sesión',
+            text: "{{ session('login_error') }}"
+        });
+    </script>
+@endif
+
 
 
     
