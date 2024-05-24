@@ -34,7 +34,7 @@
     <div class="rowfixed"></div>
     <div class="left_row">
         <div class="left_row_profile">
-            <img id="portada" src="images/bl.jpg" />
+            <img id="portada" src="{{ asset('img/bl.jpg') }}" />
             <div class="left_row_profile">
                 <img id="profile_pic" src="{{ asset('img/´polo.jpg') }}" />
                 <span>{{ auth()->user()->username }}<br><p>150k followers / 50 follow</p></span>
