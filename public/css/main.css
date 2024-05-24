@@ -65,7 +65,7 @@ html, body {background-color: #EDF2F6;font-family: 'Roboto', sans-serif;height:1
 
 /* MENU */
 .rowmenu {width: 90%;margin: 0px auto;display: block;bottom: 0px;overflow-x: hidden;height: 26vw;}
-.rowmenu ul {padding-left: 20px;background}
+.rowmenu ul {padding-left: 20px;}
 .rowmenu li {display: block;font-size: 19px;cursor: pointer;font-size: 12px;padding-bottom: 10px;padding-top: 10px;border-bottom: 1px solid #e6ecf5;cursor: inherit;}
 .rowmenu li a{color: #a3a3a3;cursor: pointer;}
 .rowmenu li i {padding-right: 10px}

@@ -92,9 +92,4 @@ class RegisterController extends Controller
 }
 }
 
-?>
-
-        return redirect('/')->with('success', 'ok');
-    }
-}
 

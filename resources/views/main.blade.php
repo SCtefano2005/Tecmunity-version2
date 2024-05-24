@@ -8,7 +8,7 @@
         <i class="fa fa-navicon"></i>
     </div>
     <div class="navbar_logo">
-        <img src="{{ asset('img/logotec.png') }}"" alt="" />
+        <img src="{{ asset('img/logotec.png') }}" alt="" />
     </div>
     <div class="navbar_search">
         <form method="" action="/">
@@ -62,6 +62,7 @@
         </div>
     </div>
 
+    
 
     </div>
 </div>
