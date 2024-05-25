@@ -12,8 +12,8 @@ html, body {background-color: #EDF2F6;font-family: 'Roboto', sans-serif;height:1
 /* Personalizado */
 .border-radius {border-radius: 6px;}
 .border-radius-image {border-radius: 200px;}
-.hover-orange:hover {color: #ff5e3a;}
-.selected-orange {color: #ff5e3a;}
+.hover-orange:hover {color: #1cdef0;}
+.selected-orange {color: #1cdef0;}
 .shadow {box-shadow: 3px 4px 5px rgba(209, 209, 209, 0.5);}
 
 
@@ -65,8 +65,8 @@ html, body {background-color: #EDF2F6;font-family: 'Roboto', sans-serif;height:1
 
 /* MENU */
 .rowmenu {width: 90%;margin: 0px auto;display: block;bottom: 0px;overflow-x: hidden;height: 26vw;}
-.rowmenu ul {padding-left: 20px;}
-.rowmenu li {display: block;font-size: 19px;cursor: pointer;font-size: 12px;padding-bottom: 10px;padding-top: 10px;border-bottom: 1px solid #e6ecf5;cursor: inherit;}
+.rowmenu ul {padding-left: 20px;background}
+.rowmenu li {display: block; font-size: 19px;cursor: pointer;font-size: 12px;padding-bottom: 10px;padding-top: 10px;border-bottom: 1px solid #e6ecf5;cursor: inherit;}
 .rowmenu li a{color: #a3a3a3;cursor: pointer;}
 .rowmenu li i {padding-right: 10px}
 .rowmenu ul li a:hover{color: #1cdef0;}
@@ -169,11 +169,11 @@ html, body {background-color: #EDF2F6;font-family: 'Roboto', sans-serif;height:1
 .primarymenu {padding: 20px;font-size: 13px}
 .mobilemenu_child li a{border-left: 4px solid #1cdef0;padding-left: 40px;font-size: 14px;}
 .mobilemenu_menu hr {border: 0.3px solid #9a9fbf;}
-#mobilemenu-selected {background-color: #ff5e3a;color:#fff;}
+#mobilemenu-selected {background-color: #1cdef0;color:#fff;}
 
 
 /* SETTINGS PAGE */
-.settings {width: 100%;border-bottom: 5px solid #ff5e3a;}
+.settings {width: 100%;border-bottom: 5px solid #1cdef0;}
 .settings_title {padding: 20px;border-bottom: 1px solid #e6ecf5;letter-spacing: 1px;display: flex;align-items:center;}
 .settings_title h3 {font-size: .875rem;}
 .settings_content {width: 100%;}
@@ -215,10 +215,10 @@ html, body {background-color: #EDF2F6;font-family: 'Roboto', sans-serif;height:1
 
 
 .settings_content form button {border:none;color:white;cursor: pointer;border-radius: 3px;font-size: 18px;font-weight: 700;width: 90%;height: 50px;background-color: #F04B2E;margin-top: 20px}
-.settings_content form button:hover {background-color: #ff5e3a;}
+.settings_content form button:hover {background-color: #1cdef0;}
 
 /* FEED PAGE */
-.feedcomments {width: 100%;border-top: 1px solid #ff5e3a;}
+.feedcomments {width: 100%;border-top: 1px solid #1cdef0;}
 .feedcomments li{width: 100%;display: block;border-bottom: 0.3px solid #e6ecf5;}
 .feedcomments-user {width: 90%;display: flex;align-items:center;margin: 10px auto;}
 .feedcomments-user img {width:40px;height:40px;border-radius: 100%;}
@@ -228,12 +228,12 @@ html, body {background-color: #EDF2F6;font-family: 'Roboto', sans-serif;height:1
 .feedcomments-comment p {width: 90%;margin:10px auto;}
 .feedcomments-foot {width: 90%;margin:10px auto;align-items:center;}
 .feedcomments-foot i {font-size: 14px;padding-right: 10px;color: #888da8;cursor: pointer;}
-.feedcomments-foot i:hover {color: #ff5e3a;}
+.feedcomments-foot i:hover {color: #1cdef0;}
 .feedcomments-foot span {font-size: 12px;font-weight: 700;color: #888da8;font-family: Roboto,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;}
 .feedcomments-foot p {float:right;}
 .feedcomments-foot p a i{padding-right: 5px;}
 .feedcomments-foot p a{color: #888da8;}
-.feedcomments-foot p a:hover {color: #ff5e3a;}
+.feedcomments-foot p a:hover {color: #1cdef0;}
 
 /* FRIENDS PAGE */
 .friend {width: 100%;}
@@ -244,14 +244,14 @@ html, body {background-color: #EDF2F6;font-family: 'Roboto', sans-serif;height:1
 .friend_title span p {font-size: .675rem;}
 .friend_title button {border:none;color: white;margin-left:-20px;cursor: pointer;border-radius: 3px;width: 70px;height: 30px;}
 .add-friend {background-color: #38A9FF;}
-.delete-friend {background-color: #ff5e3a;}
+.delete-friend {background-color: #1cdef0;}
 
 /* PROFILE PAGE */
 .row_contain_profilephotos {width: 100%;}
 .row_contain_profilephotos ul {width: 90%;margin:10px auto;display: block;text-align: center;}
 .row_contain_profilephotos ul li {display: inline-block;}
 .row_contain_profilephotos ul li img {width: 50px;height: 50px;border-radius: 4px}
-#select_profile_menu b{color: #ff5e3a;}
+#select_profile_menu b{color: #1cdef0;}
 /* PROFILE PHOTO PAGE */
 .row_contain_profilephotospage {width: 100%;}
 .row_contain_profilephotospage ul {width: 100%;margin:10px auto;display: block;text-align: center;}

@@ -23,5 +23,6 @@ Route::get('/espera', function () {
 
 Route::get('/verify-email/{token}', [RegisterController::class, 'verifyEmail'])->name('verify.email');
 
-
+Route::middleware(['auth', 'verified'])->get('/account', [HomeController::class, 'account'])->name('account');
+Route::middleware(['auth', 'verified'])->get('/informacion-Personal', [HomeController::class, 'informationPersonal'])->name('infoPersonal');
 ?>

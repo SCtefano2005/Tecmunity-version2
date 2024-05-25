@@ -62,6 +62,8 @@
         </div>
     </div>
 
+ @yield('contenido')   
+
 <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-arrow-up"></i></button>
 
 
@@ -134,12 +136,12 @@
     <div class="modal-icon-select"><i class="fa fa-sort-asc" aria-hidden="true"></i></div>
     <div class="modal-title">
         <span>YOUR ACCOUNT</span>
-         <a href="settings.html"><i class="fa fa-cogs"></i></a>
+         <a href="#"><i class="fa fa-cogs"></i></a>
     </div>
     <div class="modal-content">
         <ul>
             <li>
-                <a href="settings.html">
+                <a href="{{ route('account') }}">
                     <i class="fa fa-tasks" aria-hidden="true"></i>
                     <span><b>Profile Settings</b><br>Yours profile settings</span>
                 </a>
