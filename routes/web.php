@@ -27,4 +27,5 @@ Route::get('/verify-email/{token}', [RegisterController::class, 'verifyEmail'])-
 Route::middleware(['auth', 'verified'])->get('/account', [HomeController::class, 'account'])->name('account');
 Route::middleware(['auth', 'verified'])->get('/informacion-Personal', [ProfileController::class, 'edit'])->name('infoPersonal');
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//knkn
 ?>
