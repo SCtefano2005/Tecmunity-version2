@@ -21,18 +21,15 @@ class CreateUsuariosTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->date('fecha_nacimiento')->nullable();
-            $table->timestamp('fecha_registro')->nullable();
             $table->string('sexo')->nullable();
             $table->boolean('status')->default(0); // Modificado para permitir valores nulos
-            $table->boolean('privado')->default(0);;
+            $table->boolean('privado')->default(0);
             $table->boolean('admin')->default(0);;
             $table->string('avatar')->nullable();
-            $table->unsignedBigInteger('carrera_id')->nullable(); // Nombre de la columna de la clave foránea
+            $table->foreignId('carrera_id')->nullable()->constrained('carreras')->onDelete('cascade');
             $table->text('biografia')->nullable();
             $table->timestamps();
 
-            // Definir la restricción de clave foránea
-            $table->foreign('carrera_id')->references('id')->on('carreras')->onDelete('cascade');
         });
     }
 

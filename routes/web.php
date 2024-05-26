@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModalController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
@@ -24,5 +25,6 @@ Route::get('/espera', function () {
 Route::get('/verify-email/{token}', [RegisterController::class, 'verifyEmail'])->name('verify.email');
 
 Route::middleware(['auth', 'verified'])->get('/account', [HomeController::class, 'account'])->name('account');
-Route::middleware(['auth', 'verified'])->get('/informacion-Personal', [HomeController::class, 'informationPersonal'])->name('infoPersonal');
+Route::middleware(['auth', 'verified'])->get('/informacion-Personal', [ProfileController::class, 'edit'])->name('infoPersonal');
+Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 ?>

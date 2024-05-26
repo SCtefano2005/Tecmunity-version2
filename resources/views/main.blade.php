@@ -24,8 +24,8 @@
         </ul>
     </div>
     <div class="navbar_user" id="profilemodal" style="cursor:pointer">
-        <img src="{{ 'img/´polo.jpg' }}" alt="" />
-        <span id="navbar_user_top">{{ auth()->user()->username}}<br><p>User</p></span><i class="fa fa-angle-down"></i>
+        <img src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/default-avatar.png') }}" alt="" />
+        <span id="navbar_user_top">{{ auth()->user()->nombre}}<br><p>User</p></span><i class="fa fa-angle-down"></i>
     </div>
 </div>
 
@@ -36,10 +36,10 @@
         <div class="left_row_profile">
             <img id="portada" src="{{ 'img/bl.jpg' }}" />
             <div class="left_row_profile">
-                <img id="profile_pic" src="{{ 'img/´polo.jpg' }}" />
-                <span>{{ auth()->user()->username}}<br><p>150k followers / 50 follow</p></span>
+                <img id="profile_pic" src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/default-avatar.png') }}" />
+                <span>{{ auth()->user()->nombre}}<br><p>150k followers / 50 follow</p></span>
             </div>
-        </div>
+        </div>  
         <div class="rowmenu">
             <ul>
                 <li><a href="index.html"><i class="fa fa-globe"></i>Newsfeed</a></li>
@@ -168,8 +168,8 @@
     <div class="mobilemenu_profile">
         <img id="mobilemenu_portada" src="images/portada.jpg" />
         <div class="mobilemenu_profile">
-            <img id="mobilemenu_profile_pic" src="images/user.jpg" /><br>
-            <span>Jonh Hamstrong<br><p>150k followers / 50 follow</p></span>
+            <img id="mobilemenu_profile_pic" src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/default-avatar.jpg') }}" /><br>
+            <span>{{ auth()->user()->nombre}}<br><p>150k followers / 50 follow</p></span>
         </div>
         <div class="mobilemenu_menu">
             <ul>
