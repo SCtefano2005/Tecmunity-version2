@@ -11,7 +11,7 @@ class LoginController extends Controller
     public function index()
     {
         if(auth::check()){
-            return redirect('/home');
+            return redirect('/publicaciones');
         }
         return view('login');
     }
@@ -42,6 +42,6 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-        return redirect('/home');
+        return redirect('/publicaciones');
     }
 }

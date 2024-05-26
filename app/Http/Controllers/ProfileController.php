@@ -28,6 +28,6 @@ class ProfileController extends Controller
         
             $user->update($data);
        
-            return redirect()->route('home')->with('success', 'Perfil actualizado con éxito.');
+            return redirect()->route('publicaciones.index')->with('success', 'Perfil actualizado con éxito.');
     }
 }

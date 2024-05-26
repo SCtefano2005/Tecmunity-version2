@@ -34,5 +34,10 @@ class Publicacion extends Model
     {
         return $this->hasMany(Like::class, 'ID_publicacion', 'id');
     }
+    public function isVideo()
+    {
+        $ext = pathinfo($this->url_media, PATHINFO_EXTENSION);
+        return in_array($ext, ['mp4', 'mov', 'avi']);
+    }
 }
 
