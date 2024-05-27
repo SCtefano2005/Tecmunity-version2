@@ -12,32 +12,35 @@
             <form method="POST" action="{{ route('publicaciones.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="publish_textarea">
-                    <img class="border-radius-image" src="{{ auth()->user()->avatar }}" alt="" />
-                    <textarea name="contenido" placeholder="¿What's up, Jonh?" style="resize: none;"></textarea>
+                    <img class="border-radius-image" src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/default-avatar.png') }}" alt="" />
+                    <textarea name="contenido" placeholder="¿Algo que decir, {{ auth()->user()->nombre }}?" style="resize: none;"></textarea>
                 </div>
                 <div class="publish_icons">
                     <ul>
-                        <input type="file" name="media" accept="image/*,video/*" style="display: none;" id="input-media">
-                        <label for="input-media">
-                            <i class="fa fa-camera"></i>
-                        </label>
-                        
-                        <input type="url" name="video_url" placeholder="Video URL" style="display: none;" id="input-video-url">
-                        <label for="input-video-url">
-                            <i class="fa fa-video-camera"></i>
-                        </label>
+                        <li>
+                            <input type="file" name="media" accept="image/*,video/*" style="display: none;" id="input-media" onchange="previewMedia(event)">
+                            <label for="input-media">
+                                <i class="fa fa-camera"></i>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="url" name="video_url" placeholder="Video URL" style="display: none;" id="input-video-url" onchange="showVideoPreview(event)">
+                            <label for="input-video-url">
+                                <i class="fa fa-video-camera"></i>
+                            </label>
+                        </li>
                     </ul>
                     <button type="submit">Publish</button>
                 </div>
+                <div id="media-preview" style="margin-top: 10px;"></div>
             </form>
         </div>
     </div>
-    <!-- Feed de publicaciones -->
     @foreach($publicaciones as $publicacion)
         <div class="row border-radius">
             <div class="feed">
                 <div class="feed_title">
-                    <img src="{{ $publicacion->usuario->avatar }}" alt="" />
+                    <img src="{{ Storage::url($publicacion->usuario->avatar) }}" alt="" />
                     <span>
                         <b>{{ $publicacion->usuario->nombre }} {{ $publicacion->usuario->apellido }}</b> shared a 
                         @if($publicacion->url_media)
@@ -62,7 +65,9 @@
                             @endif
                         </div>
                     @endif
-                    <p>{{ $publicacion->contenido }}</p>
+                    <div class="feed_content_image">
+                        <p>{{ $publicacion->contenido }}</p>
+                    </div>
                     @if($publicacion->video_url)
                         <div class="feed_content_video">
                             <a href="{{ $publicacion->video_url }}" target="_blank">{{ $publicacion->video_url }}</a>
@@ -109,5 +114,37 @@
         </div>
     </div>
 </div>
-</div>
+
+<script>
+    function previewMedia(event) {
+        var previewContainer = document.getElementById('media-preview');
+        previewContainer.innerHTML = ''; // Clear previous previews
+        var file = event.target.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var previewElement;
+                if (file.type.startsWith('image/')) {
+                    previewElement = document.createElement('img');
+                    previewElement.src = e.target.result;
+                    previewElement.style.maxWidth = '200px';
+                    previewElement.style.maxHeight = '200px';
+                    previewElement.style.display = 'block';
+                    previewElement.style.marginTop = '10px';
+                } else if (file.type.startsWith('video/')) {
+                    previewElement = document.createElement('video');
+                    previewElement.src = e.target.result;
+                    previewElement.controls = true;
+                    previewElement.style.maxWidth = '200px';
+                    previewElement.style.maxHeight = '200px';
+                    previewElement.style.display = 'block';
+                    previewElement.style.marginTop = '10px';
+                }
+                previewContainer.appendChild(previewElement);
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
 @endsection
