@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+@endforeach
 </div>
 
 <div class="suggestions_row">

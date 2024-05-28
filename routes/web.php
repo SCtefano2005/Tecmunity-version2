@@ -8,7 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicacionController;
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\PerfilController;
 
 Route::get('/', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
@@ -32,6 +32,5 @@ Route::post('/profile', [ProfileController::class, 'update'])->name('profile.upd
 Route::middleware(['auth', 'verified'])->get('/publicaciones', [PublicacionController::class, 'index'])->name('publicaciones.index');
 Route::middleware(['auth', 'verified'])->post('/publicaciones', [PublicacionController::class, 'store'])->name('publicaciones.store');
 
-Route::get('/perfil/{id}', [UsuarioController::class, 'show'])->name('perfil.show');
-
+Route::get('perfil/{id}', [PerfilController::class, 'show'])->name('perfil.show');
 ?>

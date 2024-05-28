@@ -8,7 +8,7 @@
         <i class="fa fa-navicon"></i>
     </div>
     <div class="navbar_logo">
-        <img src="{{ 'img/logotec.png' }}" alt="" />
+        <img src="{{ asset('img/logotec.png') }}" alt="" />
     </div>
     <div class="navbar_search">
         <form method="" action="/">
@@ -34,7 +34,7 @@
     <div class="rowfixed"></div>
     <div class="left_row">
         <div class="left_row_profile">
-            <img id="portada" src="{{ 'img/bl.jpg' }}" />
+            <img id="portada" src="{{ asset('img/bl.jpg') }}" />
             <div class="left_row_profile">
                 <img id="profile_pic" src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/default-avatar.png') }}" />
                 <span>{{ auth()->user()->nombre}}<br><p>150k followers / 50 follow</p></span>
