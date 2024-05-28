@@ -56,7 +56,7 @@
                     @if($publicacion->url_media)
                         <div class="feed_content_image">
                             @if($publicacion->isVideo())
-                                <video controls>
+                                <video controls style="max-width: 500px; max-height: 500px;">
                                     <source src="{{ Storage::url($publicacion->url_media) }}" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>

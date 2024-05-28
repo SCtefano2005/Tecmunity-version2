@@ -19,7 +19,7 @@ class PublicacionController extends Controller
     {
         $request->validate([
             'contenido' => 'required|string',
-            'media' => 'nullable|file|mimes:jpeg,png,jpg,gif,mp4,mov,avi',
+            'media' => 'nullable|file|mimes:jpeg,png,jpg,gif,mp4,mov,avi,mp3',
             'video_url' => 'nullable|url'
         ]);
 
