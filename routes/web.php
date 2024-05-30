@@ -33,4 +33,6 @@ Route::middleware(['auth', 'verified'])->get('/publicaciones', [PublicacionContr
 Route::middleware(['auth', 'verified'])->post('/publicaciones', [PublicacionController::class, 'store'])->name('publicaciones.store');
 
 Route::get('perfil/{id}', [PerfilController::class, 'show'])->name('perfil.show');
+
+Route::middleware(['auth', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 ?>

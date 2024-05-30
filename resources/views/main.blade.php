@@ -9,7 +9,7 @@
     </div>
     <div class="navbar_logo">
         <a href="{{ route('publicaciones.index') }}">
-        <img src="{{ asset('img/logonuevo.jpg') }}" alt="" />
+        <img src="{{ asset('img/logotec.png') }}" alt="" />
         </a>
     </div>
     <div class="navbar_search">
@@ -155,12 +155,9 @@
                 </a>
             </li>
             <li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-                <a href="#" onclick="event.preventDefault(); logoutConfirm();">
+                <a href="login.html">
                     <i class="fa fa-power-off" aria-hidden="true"></i>
-                    <span><b>Salir</b><br>Cerrar sesión</span>
+                    <span><b>Log Out</b><br>Close your session</span>
                 </a>
             </li>
         </ul>
