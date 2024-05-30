@@ -155,9 +155,12 @@
                 </a>
             </li>
             <li>
-                <a href="login.html">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                <a href="#" onclick="event.preventDefault(); logoutConfirm();">
                     <i class="fa fa-power-off" aria-hidden="true"></i>
-                    <span><b>Log Out</b><br>Close your session</span>
+                    <span><b>Salir</b><br>Cerrar sesión</span>
                 </a>
             </li>
         </ul>

@@ -21,6 +21,7 @@
                 </div>
             </div>
         </div>
+        
     @if($perfil->id == auth()->user()->id)
         <div class="row">
             <div class="publish">
