@@ -33,6 +33,7 @@ class PublicacionController extends Controller
 
         Publicacion::create($data);
 
-        return redirect()->route('publicaciones.index')->with('success', 'Publicación creada correctamente.');
+        return back()->with('success', 'Publicación creada correctamente.');
+
     }
 }

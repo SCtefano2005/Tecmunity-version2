@@ -12,7 +12,9 @@
             <form method="POST" action="{{ route('publicaciones.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="publish_textarea">
-                    <img class="border-radius-image" src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/default-avatar.png') }}" alt="" />
+                    <a href="{{ route('perfil.show', ['id' => auth()->user()->id]) }}">
+                        <img class="border-radius-image" src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/default-avatar.png') }}" alt="" />
+                    </a>
                     <textarea name="contenido" placeholder="¿Algo que decir, {{ auth()->user()->nombre }}?" style="resize: none;"></textarea>
                 </div>
                 <div class="publish_icons">
@@ -40,13 +42,15 @@
         <div class="row border-radius">
             <div class="feed">
                 <div class="feed_title">
-                    <img src="{{ Storage::url($publicacion->usuario->avatar) }}" alt="" />
+                    <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}">
+                        <img src="{{ Storage::url($publicacion->usuario->avatar) }}" alt="" />
+                    </a>
                     <span>
-                        <b>{{ $publicacion->usuario->nombre }} {{ $publicacion->usuario->apellido }}</b> shared a 
+                        <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}"><b>{{ $publicacion->usuario->nombre }} {{ $publicacion->usuario->apellido }}</b></a> shared a 
                         @if($publicacion->url_media)
-                            <a href="feed.html">{{ $publicacion->isVideo() ? 'video' : 'photo' }}</a>
+                            <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}">{{ $publicacion->isVideo() ? 'video' : 'photo' }}</a>
                         @else
-                            post
+                            <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}">post</a>
                         @endif
                         <br>
                         <p>{{ $publicacion->created_at->format('F d \a\t h:i A') }}</p>
@@ -61,7 +65,7 @@
                                     Your browser does not support the video tag.
                                 </video>
                             @else
-                                <a href="feed.html"><img src="{{ Storage::url($publicacion->url_media) }}" alt="" /></a>
+                                <a href=""><img src="{{ Storage::url($publicacion->url_media) }}" alt="" /></a>
                             @endif
                         </div>
                     @endif

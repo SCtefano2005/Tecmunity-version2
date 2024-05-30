@@ -8,7 +8,9 @@
         <i class="fa fa-navicon"></i>
     </div>
     <div class="navbar_logo">
-        <img src="{{ asset('img/logotec.png') }}" alt="" />
+        <a href="{{ route('publicaciones.index') }}">
+        <img src="{{ asset('img/logonuevo.jpg') }}" alt="" />
+        </a>
     </div>
     <div class="navbar_search">
         <form method="" action="/">
