@@ -9,7 +9,7 @@
     </div>
     <div class="navbar_logo">
         <a href="{{ route('publicaciones.index') }}">
-        <img src="{{ asset('img/logonuevo.jpg') }}" alt="" />
+        <img src="{{ asset('img/logotec.png') }}" alt="" />
         </a>
     </div>
     <div class="navbar_search">

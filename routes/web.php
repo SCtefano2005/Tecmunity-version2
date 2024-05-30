@@ -18,7 +18,6 @@ Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
-
 Route::get('/espera', function () {
     return view('esperaverificacion');
 })->name('espera');
@@ -35,8 +34,12 @@ Route::middleware(['auth', 'verified'])->post('/publicaciones', [PublicacionCont
 
 Route::get('perfil/{id}', [PerfilController::class, 'show'])->name('perfil.show');
 
+<<<<<<< HEAD
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/dashboard/control-usuarios', [DashboardController::class, 'controlUsuarios'])->name('dashboard-usuarios');
 
+=======
+Route::middleware(['auth', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+>>>>>>> 963965c2a49596eae9fb764e92af42e88d0abb31
 ?>

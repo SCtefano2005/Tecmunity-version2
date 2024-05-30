@@ -21,6 +21,20 @@
                 </div>
             </div>
         </div>
+        <div class="perfil2">
+            <div class="left_row_profile2">
+                <img id="portada2" src="{{ asset('img/bl.jpg') }}" />
+                <div class="left_row_profile2">
+                    <img id="profile_pic2" src="{{ $perfil->avatar ? asset('storage/' . $perfil->avatar) : asset('img/default-avatar.png') }}" />
+                    <span>{{ $perfil->nombre}}<br><p>150k followers / 50 follow</p></span>
+                    <form action="" method="POST">
+                        @csrf
+                        <button type="submit" class="follow-button">Seguir</button>
+                    </form>
+                </div>
+            </div>
+        </div> 
+
     @if($perfil->id == auth()->user()->id)
         <div class="row">
             <div class="publish">
