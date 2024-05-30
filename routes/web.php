@@ -9,6 +9,7 @@ use App\Http\Controllers\ModalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
@@ -33,4 +34,7 @@ Route::middleware(['auth', 'verified'])->get('/publicaciones', [PublicacionContr
 Route::middleware(['auth', 'verified'])->post('/publicaciones', [PublicacionController::class, 'store'])->name('publicaciones.store');
 
 Route::get('perfil/{id}', [PerfilController::class, 'show'])->name('perfil.show');
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 ?>
