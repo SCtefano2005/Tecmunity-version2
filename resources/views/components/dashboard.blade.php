@@ -37,47 +37,40 @@
       <aside id="sidebar">
         <div class="sidebar-title">
           <div class="sidebar-brand">
-            <span class="material-icons-outlined">inventory</span> TECMUNITY
+            <span class="material-icons-outlined"></span> TECMUNITY
           </div>
           <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
         </div>
 
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
-            <a href="#" target="_blank">
+            <a href="{{ route('dashboard') }}">
               <span class="material-icons-outlined">dashboard</span> Dashboard
             </a>
           </li>
+
+            <a style="text-decoration:none;" href="{{ route('dashboard-usuarios') }}">
+                <li class="sidebar-list-item">
+                    <span class="material-icons-outlined">manage_accounts</span> Usuarios
+                </li>
+            </a>
+          
           <li class="sidebar-list-item">
             <a href="#" target="_blank">
-              <span class="material-icons-outlined">inventory_2</span> Products
+              <span class="material-icons-outlined">person_off</span> Lista de baneos
             </a>
           </li>
           <li class="sidebar-list-item">
             <a href="#" target="_blank">
-              <span class="material-icons-outlined">fact_check</span> Inventory
+              <span class="material-icons-outlined">report</span> Reportes
             </a>
           </li>
           <li class="sidebar-list-item">
             <a href="#" target="_blank">
-              <span class="material-icons-outlined">add_shopping_cart</span> Purchase Orders
+              <span class="material-icons-outlined">logout</span> Volver a Tecmunity
             </a>
           </li>
-          <li class="sidebar-list-item">
-            <a href="#" target="_blank">
-              <span class="material-icons-outlined">shopping_cart</span> Sales Orders
-            </a>
-          </li>
-          <li class="sidebar-list-item">
-            <a href="#" target="_blank">
-              <span class="material-icons-outlined">poll</span> Reports
-            </a>
-          </li>
-          <li class="sidebar-list-item">
-            <a href="#" target="_blank">
-              <span class="material-icons-outlined">settings</span> Settings
-            </a>
-          </li>
+
         </ul>
       </aside>
       <!-- End Sidebar -->

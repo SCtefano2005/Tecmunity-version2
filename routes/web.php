@@ -37,4 +37,6 @@ Route::get('perfil/{id}', [PerfilController::class, 'show'])->name('perfil.show'
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard/control-usuarios', [DashboardController::class, 'controlUsuarios'])->name('dashboard-usuarios');
+
 ?>
