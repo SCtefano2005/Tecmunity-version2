@@ -23,6 +23,10 @@
                             <input type="text" name="apellido" value="{{ old('apellido', auth()->user()->apellido) }}" required />
                         </div>
                         <div class="pi-input pi-input-lg">
+                            <span>Username</span>
+                            <input type="text" name="username" value="{{ old('username', auth()->user()->username) }}" required />
+                        </div>
+                        <div class="pi-input pi-input-lg">
                             <span>Your Email</span>
                             <input type="text" value="{{ auth()->user()->email }}" readonly />
                         </div>
@@ -43,6 +47,10 @@
                         <div class="pi-input pi-input-lg">
                             <span>Avatar</span>
                             <input type="file" name="avatar" />
+                        </div>
+                        <div class="pi-input pi-input-lg">
+                            <span>Portada</span>
+                            <input type="file" name="portada" />
                         </div>
                         <div class="pi-input pi-input-lg">
                             <span>Genero</span>
