@@ -32,7 +32,7 @@
                             </label>
                         </li>
                     </ul>
-                    <button type="submit">Publish</button>
+                    <button type="submit">Publicar</button>
                 </div>
                 <div id="media-preview" style="margin-top: 10px;"></div>
             </form>
@@ -43,17 +43,17 @@
             <div class="feed">
                 <div class="feed_title">
                     <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}">
-                        <img src="{{ Storage::url($publicacion->usuario->avatar) }}" alt="" />
+                        <img src="{{ $publicacion->usuario->avatar ? asset('storage/' . $publicacion->usuario->avatar) : asset('img/default-avatar.png') }}" alt="" />
                     </a>
                     <span>
-                        <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}"><b>{{ $publicacion->usuario->nombre }} {{ $publicacion->usuario->apellido }}</b></a> shared a 
+                        <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}"><b>{{ $publicacion->usuario->nombre }} {{ $publicacion->usuario->apellido }}</b></a> compartió 
                         @if($publicacion->url_media)
-                            <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}">{{ $publicacion->isVideo() ? 'video' : 'photo' }}</a>
+                            <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}">{{ $publicacion->isVideo() ? 'un video' : 'una foto' }}</a>
                         @else
-                            <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}">post</a>
+                            <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}">una publicación</a>
                         @endif
                         <br>
-                        <p>{{ $publicacion->created_at->format('F d \a\t h:i A') }}</p>
+                        <p>{{ $publicacion->created_at->format('d F \a\t h:i A') }}</p>
                     </span>
                 </div>
                 <div class="feed_content">
@@ -61,11 +61,13 @@
                         <div class="feed_content_image">
                             @if($publicacion->isVideo())
                                 <video controls style="max-width: 500px; max-height: 500px;">
-                                    <source src="{{ Storage::url($publicacion->url_media) }}" type="video/mp4">
-                                    Your browser does not support the video tag.
+                                    <source src="{{ $publicacion->url_media }}" type="video/mp4">
+                                    Tu navegador no soporta la etiqueta de video.
                                 </video>
                             @else
-                                <a href=""><img src="{{ Storage::url($publicacion->url_media) }}" alt="" /></a>
+                                <a href="{{ $publicacion->url_media }}" target="_blank">
+                                    <img src="{{ $publicacion->url_media }}" alt="" style="max-width: 500px; max-height: 500px; display: block; margin-top: 10px;" />
+                                </a>
                             @endif
                         </div>
                     @endif
@@ -81,39 +83,39 @@
                 <div class="feed_footer">
                     <ul class="feed_footer_left">
                         <li class="hover-orange selected-orange"><i class="fa fa-heart"></i> {{ $publicacion->nro_likes }}</li>
-                        <li><span><b>{{ $publicacion->usuario->nombre }}</b> and others liked this</span></li>
+                        <li><span><b>{{ $publicacion->usuario->nombre }}</b> y otros les gustó esto</span></li>
                     </ul>
                     <ul class="feed_footer_right">
                         <li class="hover-orange selected-orange"><i class="fa fa-share"></i> 7k</li>
                         <a href="feed.html" style="color:#515365;">
-                            <li class="hover-orange"><i class="fa fa-comments-o"></i> 74 comments</li>
+                            <li class="hover-orange"><i class="fa fa-comments-o"></i> 74 comentarios</li>
                         </a>
                     </ul>
                 </div>
             </div>
         </div>
-@endforeach
+    @endforeach
 </div>
 
 <div class="suggestions_row">
     <div class="row shadow">
         <div class="row_title">
-            <span>Friend Suggestions</span>
-            <a href="friends.html">see more..</a>
+            <span>Sugerencias de amigos</span>
+            <a href="friends.html">ver más..</a>
         </div>
         <div class="row_contain">
             <img src="images/user-7.jpg" alt="" />
-            <span><b>Francine Smith</b><br>8 Friends in Common</span>
+            <span><b>Francine Smith</b><br>8 amigos en común</span>
             <button>+</button>
         </div>
         <div class="row_contain">
             <img src="images/user-2.jpg" alt="" />
-            <span><b>Hugh Wilson</b><br>6 Friends in Common</span>
+            <span><b>Hugh Wilson</b><br>6 amigos en común</span>
             <button>+</button>
         </div>
         <div class="row_contain">
             <img src="images/user-6.jpg" alt="" />
-            <span><b>Karen Masters</b><br>6 Friends in Common</span>
+            <span><b>Karen Masters</b><br>6 amigos en común</span>
             <button>+</button>
         </div>
     </div>
