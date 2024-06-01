@@ -11,6 +11,7 @@ use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\DashboardController;
 
+
 Route::get('/', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
@@ -42,4 +43,6 @@ Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('pu
 Route::post('/publicaciones/{publicacion}', [PublicacionController::class, 'update'])->name('publicaciones.update');
 Route::delete('/publicaciones/{publicacion}', [PublicacionController::class, 'destroy'])->name('publicaciones.destroy');
 
+Route::get('/publicaciones', [PublicacionController::class, 'index'])->name('publicaciones.index');
+Route::post('/publicaciones', [PublicacionController::class, 'store'])->name('publicaciones.store');
 ?>

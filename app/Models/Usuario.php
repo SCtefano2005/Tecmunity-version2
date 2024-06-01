@@ -14,7 +14,7 @@ class Usuario extends Authenticatable
 
     protected $fillable = [
         'nombre', 'apellido', 'email', 'username', 'password', 'fecha_nacimiento',
-        'fecha_registro', 'sexo', 'status', 'privado', 'admin', 'avatar', 'carrera_id', 'biografia',
+        'fecha_registro', 'sexo', 'status', 'privado', 'admin', 'avatar', 'portada', 'carrera_id', 'biografia',
     ];
 
     // Relación muchos a uno con la tabla Carreras

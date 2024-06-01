@@ -13,7 +13,11 @@
                 @csrf
                 <div class="publish_textarea">
                     <a href="{{ route('perfil.show', ['id' => auth()->user()->id]) }}">
-                        <img class="border-radius-image" src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/default-avatar.png') }}" alt="" />
+                        @if(auth()->user()->avatar)
+                        <img class="border-radius-image" src="{{ auth()->user()->avatar }}" alt="" />
+                        @else
+                            <img class="border-radius-image" src="{{ asset('img/default-avatar.jpg') }}" />
+                        @endif
                     </a>
                     <textarea name="contenido" placeholder="¿Algo que decir, {{ auth()->user()->nombre }}?" style="resize: none;"></textarea>
                 </div>
@@ -23,12 +27,6 @@
                             <input type="file" name="media" accept="image/*,video/*" style="display: none;" id="input-media" onchange="previewMedia(event)">
                             <label for="input-media">
                                 <i class="fa fa-camera"></i>
-                            </label>
-                        </li>
-                        <li>
-                            <input type="url" name="video_url" placeholder="Video URL" style="display: none;" id="input-video-url" onchange="showVideoPreview(event)">
-                            <label for="input-video-url">
-                                <i class="fa fa-video-camera"></i>
                             </label>
                         </li>
                     </ul>
@@ -43,7 +41,11 @@
             <div class="feed">
                 <div class="feed_title">
                     <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}">
-                        <img src="{{ $publicacion->usuario->avatar ? asset('storage/' . $publicacion->usuario->avatar) : asset('img/default-avatar.png') }}" alt="" />
+                        @if($publicacion->usuario->avatar)
+                            <img src="{{ $publicacion->usuario->avatar }}" />
+                        @else
+                            <img src="{{ asset('img/default-avatar.jpg') }}"/>
+                        @endif
                     </a>
                     <span>
                         <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}"><b>{{ $publicacion->usuario->nombre }} {{ $publicacion->usuario->apellido }}</b></a> compartió 

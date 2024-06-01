@@ -17,7 +17,7 @@ class CreateLikesTable extends Migration
             $table->id('ID_like');
             $table->unsignedBigInteger('ID_usuario');
             $table->unsignedBigInteger('ID_publicacion'); // Foreign key
-            $table->unsignedBigInteger('ID_comentario'); // Foreign key
+            $table->unsignedBigInteger('ID_comentario')->default(0);; // Foreign key
 
             $table->foreign('ID_comentario')->references('ID_comentario')->on('comentarios')->onDelete('cascade');
             $table->foreign('ID_usuario')->references('id')->on('usuarios')->onDelete('cascade');

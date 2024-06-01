@@ -29,7 +29,9 @@ class UpdateProfileRequest extends FormRequest
             'privado' => 'required|boolean',
             'biografia' => 'nullable|string',
             'avatar' => 'nullable|image|max:2048',
+            'portada' => 'nullable|image|max:2048',
             'carrera_id' => 'nullable|exists:carreras,id',
+            'username' => 'required|string|max:255'
         ];
     }
 }

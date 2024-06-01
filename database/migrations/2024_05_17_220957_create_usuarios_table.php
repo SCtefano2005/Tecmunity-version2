@@ -26,6 +26,7 @@ class CreateUsuariosTable extends Migration
             $table->boolean('privado')->default(0);
             $table->boolean('admin')->default(0);;
             $table->string('avatar')->nullable();
+            $table->string('portada')->nullable();
             $table->foreignId('carrera_id')->nullable()->constrained('carreras')->onDelete('cascade');
             $table->text('biografia')->nullable();
             $table->timestamps();

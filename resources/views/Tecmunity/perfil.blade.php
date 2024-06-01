@@ -23,9 +23,17 @@
         </div>
         <div class="perfil2">
             <div class="left_row_profile2">
-                <img id="portada2" src="{{ asset('img/bl.jpg') }}" />
+                @if(auth()->user()->portada)
+                    <img id="portada" src="{{ auth()->user()->portada }}" />
+                @else
+                    <img id="portada" src="{{ asset('img/bl.jpg') }}" />
+                @endif
                 <div class="left_row_profile2">
-                    <img id="profile_pic2" src="{{ $perfil->avatar ? asset('storage/' . $perfil->avatar) : asset('img/default-avatar.png') }}" />
+                    @if(auth()->user()->avatar)
+                        <img id="profile_pic" src="{{ auth()->user()->avatar }}" />
+                    @else
+                        <img id="profile_pic" src="{{ asset('img/default-avatar.jpg') }}" />
+                    @endif
                     <span>{{ $perfil->nombre}}<br><p>150k followers / 50 follow</p></span>
                     <form action="" method="POST">
                         @csrf
@@ -44,7 +52,11 @@
                 <form method="POST" action="{{ route('publicaciones.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="publish_textarea">
-                        <img class="border-radius-image" src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/default-avatar.png') }}" alt="" />
+                        @if(auth()->user()->avatar)
+                            <img class="border-radius-image" src="{{ auth()->user()->avatar }}" alt="" />
+                        @else
+                        <img class="border-radius-image" src="{{ asset('img/default-avatar.jpg') }}" alt="" />
+                        @endif
                         <textarea name="contenido" placeholder="¿Algo que decir, {{ auth()->user()->nombre }}?" style="resize: none;"></textarea>
                     </div>
                     <div class="publish_icons">
@@ -74,7 +86,11 @@
             <div class="feed">
                 <div class="feed_title">
                     <a href="{{ route('perfil.show', ['id' => $perfil->id]) }}">
-                        <img src="{{ Storage::url($publicacion->usuario->avatar) }}" alt="" />
+                        @if($publicacion->usuario->avatar)
+                            <img src="{{ $publicacion->usuario->avatar }}" alt="" />
+                        @else
+                        <img src="{{ asset('img/default-avatar.jpg') }}" alt="" />
+                        @endif
                     </a>
                     <span>
                         <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}"><b>{{ $publicacion->usuario->nombre }} {{ $publicacion->usuario->apellido }}</b></a> shared a 

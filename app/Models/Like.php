@@ -12,7 +12,7 @@ class Like extends Model
     protected $table = 'likes';
 
     protected $fillable = [
-        'ID_usuario', 'ID_publicacion', 'fecha', 'ID_comentario'
+        'ID_usuario', 'ID_publicacion', 'fecha', 'ID_comentario',
     ];
 
     // Relación con el modelo Usuario

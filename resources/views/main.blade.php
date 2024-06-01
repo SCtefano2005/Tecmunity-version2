@@ -26,8 +26,12 @@
         </ul>
     </div>
     <div class="navbar_user" id="profilemodal" style="cursor:pointer">
-        <img src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/default-avatar.png') }}" alt="" />
-        <span id="navbar_user_top">{{ auth()->user()->nombre}}<br><p>User</p></span><i class="fa fa-angle-down"></i>
+        @if(auth()->user()->avatar)
+            <img src="{{ auth()->user()->avatar }}" />
+        @else
+            <img src="{{ asset('img/default-avatar.jpg') }}" />
+        @endif
+        <span id="navbar_user_top">{{ auth()->user()->nombre}} {{ auth()->user()->apellido }}<br><p>User</p></span><i class="fa fa-angle-down"></i>
     </div>
 </div>
 
@@ -36,10 +40,18 @@
     <div class="rowfixed"></div>
     <div class="left_row">
         <div class="left_row_profile">
-            <img id="portada" src="{{ asset('img/bl.jpg') }}" />
+            @if(auth()->user()->portada)
+                <img id="portada" src="{{ auth()->user()->portada }}" />
+            @else
+                <img id="portada" src="{{ asset('img/bl.jpg') }}" />
+            @endif
             <div class="left_row_profile">
-                <img id="profile_pic" src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('img/default-avatar.png') }}" />
-                <span>{{ auth()->user()->nombre}}<br><p>150k followers / 50 follow</p></span>
+                @if(auth()->user()->avatar)
+                    <img id="profile_pic" src="{{ auth()->user()->avatar }}" />
+                @else
+                    <img id="profile_pic" src="{{ asset('img/default-avatar.jpg') }}" />
+                @endif
+                <span>{{ auth()->user()->nombre}} {{ auth()->user()->apellido }}<br><p>150k followers / 50 follow</p></span>
             </div>
         </div>  
         <div class="rowmenu">
