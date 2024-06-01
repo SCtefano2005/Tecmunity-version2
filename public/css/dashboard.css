@@ -293,3 +293,117 @@ body {
       display: none;
     }
   }
+
+
+
+
+
+/* ================================================================= */
+/* styles.css */
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.table-section {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-section h2 {
+  margin-top: 0;
+}
+
+.table-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table-section th, .table-section td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.table-section th {
+  background-color: #007bff;
+  color: white;
+}
+
+.table-section td .action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.table-section td .action-buttons button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.table-section td .action-buttons button.edit {
+  background-color: #ffc107;
+  color: white;
+}
+
+.table-section td .action-buttons button.delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .table-section table, .table-section thead, .table-section tbody, .table-section th, .table-section td, .table-section tr {
+      display: block;
+  }
+
+  .table-section th, .table-section td {
+      width: 100%;
+      box-sizing: border-box;
+  }
+
+  .table-section tr {
+      margin-bottom: 10px;
+  }
+
+  .table-section td {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+  }
+
+  .table-section td:before {
+      content: attr(data-label);
+      font-weight: bold;
+      flex: 1;
+      text-align: left;
+  }
+}
