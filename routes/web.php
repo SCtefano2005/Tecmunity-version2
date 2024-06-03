@@ -10,7 +10,8 @@ use App\Http\Controllers\{
     PublicacionController,
     PerfilController,
     DashboardController,
-    ComentarioController
+    ComentarioController,
+    LikeController
 };
 
 // Rutas de autenticación y registro
@@ -42,7 +43,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard/control-usuarios', [DashboardController::class, 'controlUsuarios'])->name('dashboard-usuarios');
     Route::get('/publicacion/{id}', [ComentarioController::class, 'show'])->name('comentario.show');
     Route::post('/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store');
-
+    Route::post('/publicacion/{publicacion}/like', [LikeController::class, 'likePublicacion'])->name('like.publicacion');
+    Route::post('/publicacion/{publicacion}/unlike', [LikeController::class, 'unlikePublicacion'])->name('unlike.publicacion');
 });
 
 // Ruta de perfil de usuario
