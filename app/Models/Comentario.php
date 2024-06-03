@@ -17,6 +17,7 @@ class Comentario extends Model
         'ID_usuario',
         'nro_likes',
         'contenido',
+        'url_media',
         'fecha'
     ];
 
@@ -34,5 +35,15 @@ class Comentario extends Model
     public function likes()
     {
         return $this->hasMany(Like::class, 'ID_comentario', 'id');
+    }
+
+    public function isVideo()
+    {
+        // Lógica para determinar si el comentario contiene un video
+        // Por ejemplo, podrías verificar si la URL de la media contiene una extensión de video
+        $mediaUrl = $this->url_media;
+        $extension = pathinfo($mediaUrl, PATHINFO_EXTENSION);
+        $videoExtensions = ['mp4', 'avi', 'mov']; // Extensiones de video permitidas
+        return in_array($extension, $videoExtensions);
     }
 }

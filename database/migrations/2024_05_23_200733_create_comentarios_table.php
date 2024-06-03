@@ -19,6 +19,7 @@ class CreateComentariosTable extends Migration
             $table->unsignedBigInteger('ID_usuario');
             $table->integer('nro_likes')->default(0);
             $table->text('contenido');
+            $table->string('url_media')->nullable(); // Media URL, can be null
             $table->timestamp('fecha')->useCurrent();
 
             $table->foreign('ID_publicacion')->references('ID_publicacion')->on('publicaciones')->onDelete('cascade');

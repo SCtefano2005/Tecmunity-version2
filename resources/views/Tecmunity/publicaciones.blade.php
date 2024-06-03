@@ -89,8 +89,8 @@
                     </ul>
                     <ul class="feed_footer_right">
                         <li class="hover-orange selected-orange"><i class="fa fa-share"></i> 7k</li>
-                        <a href="feed.html" style="color:#515365;">
-                            <li class="hover-orange"><i class="fa fa-comments-o"></i> 74 comentarios</li>
+                        <a href="{{ route('comentario.show', ['id' => $publicacion->ID_publicacion]) }}" style="color:#515365;">
+                            <li class="hover-orange"><i class="fa fa-comments-o"></i> {{ $publicacion->comentarios->count() }} comentarios</li>
                         </a>
                     </ul>
                 </div>
