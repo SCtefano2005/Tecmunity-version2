@@ -32,8 +32,8 @@ class Publicacion extends Model
     // Relación uno a muchos con la tabla Likes
     public function likes()
     {
-        return $this->hasMany(Like::class, 'ID_publicacion', 'id');
-    }
+    return $this->hasMany(Like::class, 'ID_publicacion', 'ID_publicacion');
+    }   
     public function isVideo()
     {
         $ext = pathinfo($this->url_media, PATHINFO_EXTENSION);
