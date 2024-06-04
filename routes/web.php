@@ -49,3 +49,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // Ruta de perfil de usuario
 Route::get('perfil/{id}', [PerfilController::class, 'show'])->name('perfil.show');
+
+Route::get('/dashboard/contar-columnas-usuarios', [DashboardController::class, 'contarColumnasUsuarios']);
