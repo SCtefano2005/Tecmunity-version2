@@ -70,7 +70,7 @@ body {
   #sidebar {
     grid-area: sidebar;
     height: 100%;
-    background-color: #21232d;
+    background-color:#11031d;
     color: #9799ab;
     overflow-y: auto;
     transition: all 0.5s;
@@ -406,4 +406,14 @@ main {
       flex: 1;
       text-align: left;
   }
+}
+.sidebar-link {
+  text-decoration: none;
+  color: inherit; /* Hereda el color del texto del contenedor padre */
+  display: block;
+  padding: 10px;
+}
+
+.sidebar-link:hover {
+  background-color: #24092c; /* Cambia el color de fondo al pasar el mouse sobre el enlace */
 }

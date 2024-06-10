@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Carrera;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -41,6 +42,16 @@ class ProfileController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('publicaciones.index')->with('success', 'Perfil actualizado con éxito.');
+        return redirect()->route('perfil.show', ['id' => Auth::id()])->with('success', 'Perfil actualizado con éxito.');
+
     }
+    public function updateBiografia(Request $request)
+{
+    $user = Auth::user();
+    $user->biografia = $request->input('biografia');
+    $user->save();
+
+    return redirect()->back()->with('success', 'Biografía actualizada correctamente.');
+}
+
 }

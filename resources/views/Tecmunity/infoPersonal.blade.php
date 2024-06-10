@@ -1,8 +1,16 @@
-@extends('settings')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <title>Document</title>
+</head>
+<body>
 
-@section('title', 'Informacion Personal')
+@include('partials.navbar')
 
-@section('contenidoSettings')
 <div class="right_row">
     <div class="row border-radius">
         <center>
@@ -55,6 +63,7 @@
                         <div class="pi-input pi-input-lg">
                             <span>Genero</span>
                             <select name="sexo">
+                               
                                 <option value="Hombre" {{ old('sexo', auth()->user()->sexo) == 'Hombre' ? 'selected' : '' }}>Hombre</option>
                                 <option value="Mujer" {{ old('sexo', auth()->user()->sexo) == 'Mujer' ? 'selected' : '' }}>Mujer</option>
                                 <option value="Otro" {{ old('sexo', auth()->user()->sexo) == 'Otro' ? 'selected' : '' }}>Otro</option>
@@ -71,11 +80,14 @@
                             <span>Biografía</span>
                             <input type="text" name="biografia" value="{{ old('biografia', auth()->user()->biografia) }}" placeholder="Una pequeña info sobre ti..." />
                         </div>
-                        <button type="submit">Guardar los cambios</button>
+                        <button style="background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;" type="submit">Guardar los cambios</button>
+                    </form>
                     </form>
                 </div>
             </div>
         </center>
     </div>
 </div>
-@endsection
+    
+</body>
+</html>

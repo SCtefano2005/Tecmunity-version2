@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     RegisterController,
@@ -11,7 +10,8 @@ use App\Http\Controllers\{
     PerfilController,
     DashboardController,
     ComentarioController,
-    LikeController
+    LikeController,
+    UserController
 };
 
 // Rutas de autenticación y registro
@@ -40,14 +40,36 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/publicaciones/{publicacion}', [PublicacionController::class, 'destroy'])->name('publicaciones.destroy');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/control-usuarios', [DashboardController::class, 'controlUsuarios'])->name('dashboard-usuarios');
     Route::get('/publicacion/{id}', [ComentarioController::class, 'show'])->name('comentario.show');
     Route::post('/comentarios', [ComentarioController::class, 'store'])->name('comentarios.store');
     Route::post('/publicacion/{publicacion}/like', [LikeController::class, 'likePublicacion'])->name('like.publicacion');
     Route::post('/publicacion/{publicacion}/unlike', [LikeController::class, 'unlikePublicacion'])->name('unlike.publicacion');
+    Route::post('/comentario/{comentario}/like', [LikeController::class, 'likeComentario'])->name('like.comentario');
+    Route::post('/comentario/{comentario}/unlike', [LikeController::class, 'unlikeComentario'])->name('unlike.comentario');
+
+    Route::get('/usuarios', [DashboardController::class, 'index_list'])->name('usuarios.index');
+    Route::get('/usuarios/{id}', [DashboardController::class, 'show'])->name('usuarios.show');
+    Route::get('/usuarios/edit/{id}', [DashboardController::class, 'edit'])->name('usuarios.edit');
+    Route::put('/usuarios/{id}', [DashboardController::class, 'update'])->name('usuarios.update');
+    Route::delete('/usuarios/{id}', [DashboardController::class, 'destroy'])->name('usuarios.destroy');
+    //Denuncias
+    Route::get('/dashboard/denuncias', [DashboardController::class, 'index_tick'])->name('dashboard.denuncias.index');
+    Route::get('/dashboard/denuncias/{denuncia}', [DashboardController::class, 'show_tick'])->name('dashboard.denuncias.show');
+    Route::delete('/dashboard/denuncias/{denuncia}', [DashboardController::class, 'destroy_tick'])->name('dashboard.denuncias.destroy');
+    Route::patch('/dashboard/denuncias/{denuncia}/aprobado', [DashboardController::class, 'aprobado_tick'])->name('dashboard.denuncias.aprobado');
+    Route::patch('/dashboard/denuncias/{denuncia}/desaprobado', [DashboardController::class, 'desaprobado_tick'])->name('dashboard.denuncias.desaprobado');
+    //
+
+    // Nueva ruta agregada
+    Route::post('/publicaciones/{from?}', [PublicacionController::class, 'store'])->name('publicaciones.store');
 });
 
 // Ruta de perfil de usuario
 Route::get('perfil/{id}', [PerfilController::class, 'show'])->name('perfil.show');
 
-Route::get('/dashboard/contar-columnas-usuarios', [DashboardController::class, 'contarColumnasUsuarios']);
+
+
+Route::post('/profile/update-biografia', [ProfileController::class, 'updateBiografia'])->name('profile.updateBiografia');
+Route::get('usuario/{usuarioId}/publicaciones', 'PublicacionController@publicacionesPorUsuario')->name('publicaciones.usuario');
+Route::get('/buscar', [UserController::class,'buscar'])->name('buscar');
+

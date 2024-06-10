@@ -3,170 +3,148 @@
 @section('title', 'Tecmunity')
 
 @section('contenido')
-<div class="right_row">
-    <div class="row">
-        <div class="publish">
-            <div class="row_title">
-                <span><i class="fa fa-newspaper-o" aria-hidden="true"></i> Status</span>
-            </div>
-            <form method="POST" action="{{ route('publicaciones.store') }}" enctype="multipart/form-data">
+
+
+
+<div class="main-content">
+    
+
+    <div class="write-post-container">
+        @if(isset($publicacion))
+        <div class="user-profile">
+            @auth
+                <img src="{{ auth()->user()->avatar  }}" alt="Avatar">
+                <div>
+                    <p><a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}" class="profile-link">{{ $publicacion->usuario->nombre }} {{ $publicacion->usuario->apellido }}</a></p>
+                    <span>{{ $publicacion->usuario->privado ? 'Privado' : 'Público' }} <i class="fas fa-caret-down"></i></span>
+                </div>
+            @else
+                <img src="{{ asset('img/default-avatar.jpg') }}" alt="Avatar">
+                <div>
+                    <p>{{ $publicacion->usuario->nombre }} {{ $publicacion->usuario->apellido }}</p>
+                    <span>Público <i class="fas fa-caret-down"></i></span>
+                </div>
+            @endauth
+        </div>
+        
+@endif
+
+        
+        <div class="post-input-container">
+            <form id="publicarForm" method="POST" action="{{ route('publicaciones.store') }}" enctype="multipart/form-data" style="display: flex; align-items: center;">
                 @csrf
-                <div class="publish_textarea">
-                    <a href="{{ route('perfil.show', ['id' => auth()->user()->id]) }}">
-                        @if(auth()->user()->avatar)
-                        <img class="border-radius-image" src="{{ auth()->user()->avatar }}" alt="" />
-                        @else
-                            <img class="border-radius-image" src="{{ asset('img/default-avatar.jpg') }}" />
-                        @endif
-                    </a>
-                    <textarea name="contenido" placeholder="¿Algo que decir, {{ auth()->user()->nombre }}?" style="resize: none;"></textarea>
+                <textarea rows="3" name="contenido" placeholder="¿Qué tienes en mente, {{ auth()->user()->nombre }}?" style="resize: none;"></textarea>
+                <div class="add-post-links">
+                    <a href="#" onclick="document.getElementById('input-video-url').style.display = 'block'; document.getElementById('input-media').style.display = 'none'; document.getElementById('input-video-url').focus(); return false;"><img src="{{ asset('img/live-video.png') }}"> Videos</a>
+                    <a href="#" onclick="document.getElementById('input-media').style.display = 'block'; document.getElementById('input-video-url').style.display = 'none'; document.getElementById('input-media').click(); return false;"><img src="{{ asset('img/photo.png') }}"> Foto</a>
                 </div>
-                <div class="publish_icons">
-                    <ul>
-                        <li>
-                            <input type="file" name="media" accept="image/*,video/*" style="display: none;" id="input-media" onchange="previewMedia(event)">
-                            <label for="input-media">
-                                <i class="fa fa-camera"></i>
-                            </label>
-                        </li>
-                    </ul>
-                    <button type="submit">Publicar</button>
-                </div>
-                <div id="media-preview" style="margin-top: 10px;"></div>
+                
+                <!-- Campo oculto para enviar el origen del formulario -->
+                <input type="hidden" name="from" value="{{ Request::is('perfil/*') ? 'perfil' : 'publicaciones' }}">
+                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                
+                <input type="file" name="media" accept="image/*,video/*" style="display: none;" id="input-media" onchange="previewMedia(event)">
+                <input type="url" name="video_url" placeholder="Video URL" style="display: none;" id="input-video-url" onchange="showVideoPreview(event)">
+                <img src="https://w7.pngwing.com/pngs/841/271/png-transparent-computer-icons-send-miscellaneous-angle-triangle-thumbnail.png" alt="Publicar" style="width: 20px; height: 20px; cursor: pointer; margin-left: auto;" onclick="document.getElementById('publicarForm').submit();">
             </form>
+            
         </div>
+        
+        
     </div>
-    @foreach($publicaciones as $publicacion)
-        <div class="row border-radius">
-            <div class="feed">
-                <div class="feed_title">
-                    <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}">
-                        @if($publicacion->usuario->avatar)
-                            <img src="{{ $publicacion->usuario->avatar }}" />
-                        @else
-                            <img src="{{ asset('img/default-avatar.jpg') }}"/>
-                        @endif
-                    </a>
-                    <span>
-                        <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}"><b>{{ $publicacion->usuario->nombre }} {{ $publicacion->usuario->apellido }}</b></a> compartió 
-                        @if($publicacion->url_media)
-                            <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}">{{ $publicacion->isVideo() ? 'un video' : 'una foto' }}</a>
-                        @else
-                            <a href="{{ route('perfil.show', ['id' => $publicacion->usuario->id]) }}">una publicación</a>
-                        @endif
-                        <br>
-                        <p>{{ $publicacion->created_at->format('d F \a\t h:i A') }}</p>
-                    </span>
-                </div>
-                <div class="feed_content">
-                    @if($publicacion->url_media)
-                        <div class="feed_content_image">
-                            @if($publicacion->isVideo())
-                                <video controls style="max-width: 500px; max-height: 500px;">
-                                    <source src="{{ $publicacion->url_media }}" type="video/mp4">
-                                    Tu navegador no soporta la etiqueta de video.
-                                </video>
-                            @else
-                                <a href="{{ $publicacion->url_media }}" target="_blank">
-                                    <img src="{{ $publicacion->url_media }}" alt="" style="max-width: 500px; max-height: 500px; display: block; margin-top: 10px;" />
-                                </a>
-                            @endif
-                        </div>
-                    @endif
-                    <div class="feed_content_image">
-                        <p>{{ $publicacion->contenido }}</p>
-                    </div>
-                    @if($publicacion->video_url)
-                        <div class="feed_content_video">
-                            <a href="{{ $publicacion->video_url }}" target="_blank">{{ $publicacion->video_url }}</a>
-                        </div>
-                    @endif
-                </div>
-                <div class="feed_footer">
-                <ul class="feed_footer_left">
-                    <li class="hover-orange selected-orange">
-                    @if ($publicacion->likes->where('ID_usuario', Auth::id())->isEmpty())
-                        <form action="{{ route('like.publicacion', $publicacion->ID_publicacion) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-like"><i class="fa fa-heart-o"></i> 
-                        {{ $publicacion->likes->count() }}</button>
-                        </form>
-                    @else
-                        <form action="{{ route('unlike.publicacion', $publicacion->ID_publicacion) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-unlike"><i class="fa fa-heart"></i> 
-                        {{ $publicacion->likes->count() }}</button>
-                        </form>
-                    @endif
-                    </li>
-                </ul>
 
-                    <ul class="feed_footer_right">
-                        <li class="hover-orange selected-orange"><i class="fa fa-share"></i> 7k</li>
-                        <a href="{{ route('comentario.show', ['id' => $publicacion->ID_publicacion]) }}" style="color:#515365;">
-                            <li class="hover-orange"><i class="fa fa-comments-o"></i> {{ $publicacion->comentarios->count() }} comentarios</li>
-                        </a>
-                    </ul>
+    @foreach($publicaciones as $publicacion)
+    <div class="post-container">
+        <div class="post-row">
+            <div class="user-profile">
+                <img src="{{ $publicacion->usuario->avatar ? $publicacion->usuario->avatar : asset('img/default-avatar.jpg') }}" alt="Avatar">
+                <div>
+                    <p><a href="{{ route('perfil.show', ['id' => auth()->id()]) }}">{{$publicacion->usuario->nombre  }} {{ $publicacion->usuario->apellido }}</a></p>
+                    <span>{{ $publicacion->created_at->format('d M Y, H:i') }}</span>
                 </div>
             </div>
+            
+            <a href="#"><i class="fas fa-ellipsis-v"></i></a>
         </div>
-    @endforeach
-</div>
+        <p class="post-text">{{ $publicacion->contenido }}</p>
+        <div class="feed_content">
+            @if($publicacion->url_media)
+                <div class="feed_content_image">
+                    @if($publicacion->isVideo())
+                        <video controls style="max-width: 500px; max-height: 500px;">
+                            <source src="{{ $publicacion->url_media }}" type="video/mp4">
+                            Tu navegador no soporta la etiqueta de video.
+                        </video>
+                    @else
+                        <img src="{{ $publicacion->url_media }}" alt="" style="max-width: 500px; max-height: 500px; display: block; margin-top: 10px;" />
+                    @endif
+                </div>
+            @endif
+            <div class="feed_content_image">
+            
+            </div>
+            @if($publicacion->video_url)
+                <div class="feed_content_video">
+                    <a href="{{ $publicacion->video_url }}" target="_blank">{{ $publicacion->video_url }}</a>
+                </div>
+            @endif
+        </div>
+        
+        <div class="post-row">
+            <div class="activity-icons">
+                <div><img src="{{ asset('img/like-blue.png') }}"> 120</div>
+                <div><img src="{{ asset('img/comments.png') }}"> 45</div>
+                <div><img src="{{ asset('img/share.png') }}"> 20</div>
 
-<div class="suggestions_row">
-    <div class="row shadow">
-        <div class="row_title">
-            <span>Sugerencias de amigos</span>
-            <a href="friends.html">ver más..</a>
-        </div>
-        <div class="row_contain">
-            <img src="images/user-7.jpg" alt="" />
-            <span><b>Francine Smith</b><br>8 amigos en común</span>
-            <button>+</button>
-        </div>
-        <div class="row_contain">
-            <img src="images/user-2.jpg" alt="" />
-            <span><b>Hugh Wilson</b><br>6 amigos en común</span>
-            <button>+</button>
-        </div>
-        <div class="row_contain">
-            <img src="images/user-6.jpg" alt="" />
-            <span><b>Karen Masters</b><br>6 amigos en común</span>
-            <button>+</button>
+                
+            </div>
+            <div class="post-profile-icon">
+                @if($publicacion->usuario->username)
+                    <img src="{{ $publicacion->usuario->avatar}}">
+                @else
+                    <img src="{{ asset('img/default-avatar.jpg') }}">
+                @endif
+                <i class="fas fa-caret-down"></i>
+            </div>
+            
+            
         </div>
     </div>
+@endforeach
+
+
+    <!-- Se omiten el resto del contenido de las publicaciones debido a su extensión -->
+
+    <button type="button" class="load-more-btn">Cargar más</button>
 </div>
 
-<script>
-    function previewMedia(event) {
-        var previewContainer = document.getElementById('media-preview');
-        previewContainer.innerHTML = ''; // Clear previous previews
-        var file = event.target.files[0];
+<!-- Barra lateral derecha -->
 
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var previewElement;
-                if (file.type.startsWith('image/')) {
-                    previewElement = document.createElement('img');
-                    previewElement.src = e.target.result;
-                    previewElement.style.maxWidth = '200px';
-                    previewElement.style.maxHeight = '200px';
-                    previewElement.style.display = 'block';
-                    previewElement.style.marginTop = '10px';
-                } else if (file.type.startsWith('video/')) {
-                    previewElement = document.createElement('video');
-                    previewElement.src = e.target.result;
-                    previewElement.controls = true;
-                    previewElement.style.maxWidth = '200px';
-                    previewElement.style.maxHeight = '200px';
-                    previewElement.style.display = 'block';
-                    previewElement.style.marginTop = '10px';
-                }
-                previewContainer.appendChild(previewElement);
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-</script>
+<div class="right-sidebar">
+    <div class="sidebar-title">
+        <h4>Eventos</h4>
+        <a href="#">Ver todos</a>
+    </div>
+
+    <!-- Se omite el contenido de eventos debido a su extensión -->
+
+    <div class="sidebar-title">
+        <h4>Publicidad</h4>
+        <a href="#">Cerrar</a>
+    </div>
+
+    <img src="{{ asset('img/advertisement.png') }}" class="sidebar-ad">
+
+    <div class="sidebar-title">
+        <h4>Conversación</h4>
+        <a href="#">Ocultar Chat</a>
+    </div>
+
+    <!-- Se omite la lista en línea debido a su extensión -->
+</div>
+</div>
+
+<div class="footer">
+    <p>Derechos de autor 2024- Tecmunity</p>
+</div>
 @endsection

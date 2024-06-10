@@ -13,17 +13,28 @@ class TestEmail extends Mailable
 
     public $data;
 
-    public function __construct($data)
+    /**
+     * Create a new message instance.
+     *
+     * @param array $data
+     * @return void
+     */
+    public function __construct(array $data)
     {
         $this->data = $data;
     }
 
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
     public function build()
     {
-        $address = 'tecmunity@gmail.com';
+        $address = config('mail.from.address', 'tecmunity@gmail.com');
+        $name = config('mail.from.name', 'TecMunity');
         $subject = 'Verificación de correo electrónico';
-        $name = 'TecMunity';
-        $imagePath = public_path('img/Tecmunity_Logo.png'); // Ruta a la imagen del logo, ajusta según tu estructura de archivos
+        $imagePath = public_path('img/Tecmunity_Logo.png'); // Ajusta según tu estructura de archivos
 
         return $this->view('emails.test')
                     ->from($address, $name)
@@ -36,10 +47,9 @@ class TestEmail extends Mailable
                         'verification_link' => $this->data['verification_link'],
                     ])
                     ->attach($imagePath, [
-                        'as' => 'tec-munity-logo.png', // Nombre del archivo adjunto
-                        'mime' => 'image/png', // Tipo MIME del archivo adjunto
+                        'as' => 'tec-munity-logo.png',
+                        'mime' => 'image/png',
                     ]);
     }
 }
-
 ?>

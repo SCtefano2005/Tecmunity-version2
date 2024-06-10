@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Usuario;
+use App\Models\Denuncia;
 
 class DashboardController extends Controller
 {
@@ -18,7 +20,7 @@ class DashboardController extends Controller
         // Obtiene el numero de los comentarios
         $numeroComentarios = DB::table('comentarios')->count();
 
-        // Obtiene el numero de carreras registradas 
+        // Obtiene el numero de carreras registradas
         $numeroCarreras = DB::table('carreras')->count();
 
         // Obtener el número de usuarios registrados por mes
@@ -44,20 +46,79 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function controlUsuarios()
+
+    public function index_list()
     {
-        return view('dashboard-user');
+        $usuarios = Usuario::all();
+        return view('dashboard.dashboard-user', compact('usuarios'));
     }
 
-    public function contarColumnasUsuarios()
+    public function show($id)
     {
-        // Obtener los nombres de las columnas de la tabla usuarios
-        $columnas = DB::select('SHOW COLUMNS FROM usuarios');
-
-        // Contar el número de columnas
-        $conteoColumnas = count($columnas);
-
-        // Pasar el conteo a la vista
-        return view('dashboard.usuarios', ['title' => 'Usuarios', 'conteoColumnas' => $conteoColumnas]);
+        $usuario = Usuario::findOrFail($id);
+        return view('dashboard.show', compact('usuario'));
     }
+
+    public function edit($id)
+    {
+        $usuario = Usuario::findOrFail($id);
+        return view('dashboard.edit', compact('usuario'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $usuario = Usuario::findOrFail($id);
+        $usuario->update($request->all());
+
+        return redirect()->route('usuarios.index')->with('success',
+'Usuario actualizado exitosamente');
+    }
+
+    public function destroy($id)
+    {
+        $usuario = Usuario::findOrFail($id);
+        $usuario->delete();
+
+        return redirect()->route('usuarios.index')->with('success',
+'Usuario eliminado exitosamente');
+    }
+
+    public function index_tick(){
+        $denuncias = Denuncia::all();
+        return view('dashboard.denuncias-list', compact('denuncias'));
+    }
+
+    public function show_tick(Denuncia $denuncia)
+    {
+        return view('dashboard.denuncias-list', compact('denuncia'));
+    }
+
+    public function destroy_tick(Denuncia $denuncia)
+    {
+        $denuncia->delete();
+        return redirect()->route('dashboard.denuncias-list')->with('success',
+'Denuncia eliminada exitosamente.');
+    }
+
+    public function aprobado_tick(Denuncia $denuncia)
+    {
+        $denuncia->status = 'aprobada';
+        $denuncia->fecha_de_aprobacion = now();
+        $denuncia->save();
+
+        return redirect()->route('dashboard.denuncias-list')->with('success',
+'Denuncia aprobada exitosamente.');
+    }
+
+    public function desaprobado_tick(Denuncia $denuncia)
+    {
+        $denuncia->status = 'rechazada';
+        $denuncia->save();
+
+        return redirect()->route('dashboard.denuncias-list')->with('success',
+'Denuncia rechazada exitosamente.');
+    }
+    
+
+
 }

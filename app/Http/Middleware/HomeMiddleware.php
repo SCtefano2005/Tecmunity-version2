@@ -11,7 +11,7 @@ class HomeMiddleware
     public function handle(Request $request, Closure $next)
     {
         // Verifica si el usuario está autenticado y su correo electrónico está verificado
-        if (Auth::check() && Auth::user()->email_verified_at) {
+         if (Auth::check() && Auth::user()->email_verified_at) {
             return $next($request);
         }
 

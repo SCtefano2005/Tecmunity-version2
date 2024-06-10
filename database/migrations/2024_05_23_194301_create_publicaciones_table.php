@@ -17,7 +17,7 @@ class CreatePublicacionesTable extends Migration
             $table->id('ID_publicacion'); // Primary key with auto-increment
             $table->unsignedBigInteger('ID_usuario'); // Foreign key
             $table->integer('nro_likes')->default(0); // Number of likes
-            $table->text('contenido'); // Content of the publication
+            $table->text('contenido')->nullable(); // Content of the publication
             $table->string('url_media')->nullable(); // Media URL, can be null
 
             $table->foreign('ID_usuario')->references('id')->on('usuarios')->onDelete('cascade');
