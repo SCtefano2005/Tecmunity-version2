@@ -12,24 +12,22 @@ class Like extends Model
     protected $table = 'likes';
 
     protected $fillable = [
-        'ID_usuario', 'ID_publicacion', 'fecha', 'ID_comentario',
+        'ID_usuario', 'ID_publicacion', 'ID_comentario',
     ];
 
     // Relación con el modelo Usuario
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class, 'ID_usuario','id');
+        return $this->belongsTo(Usuario::class, 'ID_usuario', 'id');
     }
 
-    // Relación con el modelo Publicacion
     public function publicacion()
     {
-        return $this->belongsTo(Publicacion::class, 'ID_publicacion');
+        return $this->belongsTo(Publicacion::class, 'ID_publicacion', 'ID_publicacion');
     }
 
-    // Relación con el modelo Comentario
     public function comentario()
     {
-        return $this->belongsTo(Comentario::class, 'ID_comentario');
+        return $this->belongsTo(Comentario::class, 'ID_comentario', 'ID_comentario');
     }
 }

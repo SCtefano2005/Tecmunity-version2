@@ -117,7 +117,17 @@ html, body {background-color: #EDF2F6;font-family: 'Roboto', sans-serif;height:1
 .feed_content_image p {padding: 10px;padding-top: 5px}
 .feed_footer {height: 50px;border-top: 1px solid #e6ecf5;display: flex;}
 .feed_footer_left {width: 55%;margin-left: 20px;}
-.feed_footer_left li {height: 50px;display: inline-block;line-height: 2.5;cursor: pointer;font-size: 14px;line-height: 3;text-align: center;margin-left: 10px}
+.feed_footer_left li {height: 50px;display: inline-block;line-height: 2.5;cursor: pointer;font-size: 14px;line-height: 3;text-align: center;margin-left: 10px;}
+@media (max-width: 600px) {
+    .feed_footer_left li {
+        margin-top: -20px;
+    }
+}
+@media (max-width: 322px) {
+    .feed_footer_left li {
+        margin-top: -1px;
+    }
+}
 .feed_footer_left li span {font-size: 10px;}
 .feed_footer_left li i {font-size: 16px;}
 .feed_footer_right {width: 40%;text-align: right;}

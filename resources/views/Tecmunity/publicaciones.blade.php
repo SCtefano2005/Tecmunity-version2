@@ -83,14 +83,28 @@
                     @endif
                 </div>
                 <div class="feed_footer">
-                    <ul class="feed_footer_left">
-                        <li class="hover-orange selected-orange"><i class="fa fa-heart"></i> {{ $publicacion->nro_likes }}</li>
-                        <li><span><b>{{ $publicacion->usuario->nombre }}</b> y otros les gustó esto</span></li>
-                    </ul>
+                <ul class="feed_footer_left">
+                    <li class="hover-orange selected-orange">
+                    @if ($publicacion->likes->where('ID_usuario', Auth::id())->isEmpty())
+                        <form action="{{ route('like.publicacion', $publicacion->ID_publicacion) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-like"><i class="fa fa-heart-o"></i> 
+                        {{ $publicacion->likes->count() }}</button>
+                        </form>
+                    @else
+                        <form action="{{ route('unlike.publicacion', $publicacion->ID_publicacion) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-unlike"><i class="fa fa-heart"></i> 
+                        {{ $publicacion->likes->count() }}</button>
+                        </form>
+                    @endif
+                    </li>
+                </ul>
+
                     <ul class="feed_footer_right">
                         <li class="hover-orange selected-orange"><i class="fa fa-share"></i> 7k</li>
-                        <a href="feed.html" style="color:#515365;">
-                            <li class="hover-orange"><i class="fa fa-comments-o"></i> 74 comentarios</li>
+                        <a href="{{ route('comentario.show', ['id' => $publicacion->ID_publicacion]) }}" style="color:#515365;">
+                            <li class="hover-orange"><i class="fa fa-comments-o"></i> {{ $publicacion->comentarios->count() }} comentarios</li>
                         </a>
                     </ul>
                 </div>
