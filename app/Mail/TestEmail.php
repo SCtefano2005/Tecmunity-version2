@@ -34,7 +34,6 @@ class TestEmail extends Mailable
         $address = config('mail.from.address', 'tecmunity@gmail.com');
         $name = config('mail.from.name', 'TecMunity');
         $subject = 'Verificación de correo electrónico';
-        $imagePath = public_path('img/Tecmunity_Logo.png'); // Ajusta según tu estructura de archivos
 
         return $this->view('emails.test')
                     ->from($address, $name)
@@ -45,11 +44,6 @@ class TestEmail extends Mailable
                     ->with([
                         'test_message' => $this->data['message'],
                         'verification_link' => $this->data['verification_link'],
-                    ])
-                    ->attach($imagePath, [
-                        'as' => 'tec-munity-logo.png',
-                        'mime' => 'image/png',
                     ]);
     }
 }
-?>

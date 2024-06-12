@@ -7,16 +7,20 @@ use Illuminate\Http\Request;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Usuario;
+use App\Models\Departamento;
 
 class PublicacionController extends Controller
 {
     public function index()
-    {
+    { 
+
+        $departamentos = Departamento::with('carreras')->get();
+        
         $publicaciones = Publicacion::with('usuario')->latest()->get();
         $usuario = auth()->user(); // Obtener el usuario autenticado
        
       
-        return view('Tecmunity.publicaciones', compact('publicaciones'));
+        return view('Tecmunity.publicaciones', compact('publicaciones','departamentos'));
     }
     public function store(Request $request)
     {

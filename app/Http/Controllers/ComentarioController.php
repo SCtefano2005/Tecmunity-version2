@@ -17,6 +17,7 @@ class ComentarioController extends Controller
         $request->validate([
             'contenido' => 'required|string|max:255',
             'media' => 'nullable|file|mimes:jpg,jpeg,png,mp4,avi|max:20480',
+            
         ]);
 
         $mediaUrl = null;
@@ -40,7 +41,8 @@ class ComentarioController extends Controller
     {
         // Aquí puedes cargar la publicación desde la base de datos usando el ID proporcionado
         $publicacion = Publicacion::findOrFail($id);
-        $comentarios = $publicacion->comentarios()->latest()->get(); // Obtener los comentarios asociados a la publicación
+        $comentarios = $publicacion->comentarios()->latest()->get();
+        // Obtener los comentarios asociados a la publicación
         return view('Tecmunity.comentarios', compact('publicacion', 'comentarios'));
     }
 }

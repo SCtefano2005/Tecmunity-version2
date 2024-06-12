@@ -11,7 +11,8 @@ use App\Http\Controllers\{
     DashboardController,
     ComentarioController,
     LikeController,
-    UserController
+    UserController,
+    DepartamentoController,
 };
 
 // Rutas de autenticación y registro
@@ -62,14 +63,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Nueva ruta agregada
     Route::post('/publicaciones/{from?}', [PublicacionController::class, 'store'])->name('publicaciones.store');
+    Route::get('perfil/{id}', [PerfilController::class, 'show'])->name('perfil.show');
+
+    Route::post('/profile/update-biografia', [ProfileController::class, 'updateBiografia'])->name('profile.updateBiografia');
+    Route::get('usuario/{usuarioId}/publicaciones', 'PublicacionController@publicacionesPorUsuario')->name('publicaciones.usuario');
+    Route::get('/buscar', [UserController::class,'buscar'])->name('buscar');
+
+
 });
 
-// Ruta de perfil de usuario
-Route::get('perfil/{id}', [PerfilController::class, 'show'])->name('perfil.show');
 
 
 
-Route::post('/profile/update-biografia', [ProfileController::class, 'updateBiografia'])->name('profile.updateBiografia');
-Route::get('usuario/{usuarioId}/publicaciones', 'PublicacionController@publicacionesPorUsuario')->name('publicaciones.usuario');
-Route::get('/buscar', [UserController::class,'buscar'])->name('buscar');
+
+
 

@@ -186,16 +186,16 @@
                     @if($perfil->id == auth()->user()->id)
                     <div class="write-post-container">
                      <div class="user-profile">
-                            <img src="{{ $publicacion->usuario->nombre? $publicacion->usuario->avatar : asset('img/profile-pic.png') }}">
+                            <img src="{{ $perfil->nombre? $perfil->avatar : asset('img/profile-pic.png') }}">
                             <div>
-                                <p>{{ $publicacion->usuario->nombre }} {{$publicacion->usuario->apellido }}</p>
-                                <small>{{ $publicacion->usuario->privado ? 'Privado' : 'Público' }} <i class="fas fa-caret-down"></i></small>
+                                <p>{{ $perfil->nombre }} {{$perfil->apellido }}</p>
+                                <small>{{ $perfil->privado ? 'Privado' : 'Público' }} <i class="fas fa-caret-down"></i></small>
                             </div>
                         </div>
                       <div class="post-input-container">
                             <form id="publicarForm" method="POST" action="{{ route('publicaciones.store') }}" enctype="multipart/form-data" style="display: flex; align-items: center;">
                              @csrf
-                             <textarea rows="3" name="contenido" placeholder="¿Qué tienes en mente, {{ $publicacion->usuario->nombre}}?" style="resize: none;"></textarea>
+                             <textarea rows="3" name="contenido" placeholder="¿Qué tienes en mente, {{ $perfil->    nombre}}?" style="resize: none;"></textarea>
                                 <div class="add-post-links">
                                  <a href="#" onclick="document.getElementById('input-video-url').style.display = 'block'; document.getElementById('input-media').style.display = 'none'; document.getElementById('input-video-url').focus(); return false;"><img src="{{ asset('img/live-video.png') }}"> Videos</a>
                                  <a href="#" onclick="document.getElementById('input-media').style.display = 'block'; document.getElementById('input-video-url').style.display = 'none'; document.getElementById('input-media').click(); return false;"><img src="{{ asset('img/photo.png') }}"> Foto</a>
@@ -255,7 +255,7 @@
     </div>
             
     <div class="footer">
-        <p>Derechos de autor 2021 - Canal de YouTube Easy Tutorials</p>
+        <p>Derechos de autor 2024 - TecMunity </p>
     </div>
     <script src="{{ asset('js/script.js') }}"></script>
 </body>

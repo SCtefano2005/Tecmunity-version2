@@ -15,6 +15,12 @@ class Carrera extends Model
         'nombre', // Lista de campos que pueden ser asignados masivamente
     ];
 
+    // Relación muchos a uno con la tabla Departamento
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class, 'departamento_id', 'id');
+    }
+
     // Relación uno a muchos con la tabla Usuarios
     public function usuarios()
     {
